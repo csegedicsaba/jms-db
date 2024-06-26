@@ -1,0 +1,11 @@
+services:
+  oracle:
+    image: 'gvenzl/oracle-free:latest'
+    environment:
+      - 'ORACLE_PASSWORD=secret'
+    ports:
+      - '1521'
+    healthcheck:
+      test: sleep 10
+      start_period: 2s
+      interval: 2s
