@@ -14,7 +14,7 @@ public class CustomerService {
 
     private final CustomerRepository customerRepository;
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    //@Transactional(propagation = Propagation.REQUIRES_NEW)
     public Customer save(Customer customer) {
 
         customer = customerRepository.save(customer);
