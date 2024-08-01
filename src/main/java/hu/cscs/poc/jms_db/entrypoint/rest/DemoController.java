@@ -40,7 +40,7 @@ public class DemoController {
 
     @GetMapping("send")
     String send() {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             try {
                 jmsTemplate.convertAndSend("DEV.QUEUE.1", UUID.randomUUID().toString());
             } catch (JmsException ex) {

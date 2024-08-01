@@ -3,25 +3,29 @@ spring:
     name: jms-db
   jms:
     listener:
-      max-concurrency: 16
+      max-concurrency: 1
       receive-timeout: 60000 # in ms!!!
-      concurrency: 16
+      concurrency: 1
     cache:
       session-cache-size: 256
       consumers: false
       producers: true
       enabled: true
 
-
   jpa:
-    database-platform: org.hibernate.dialect.OracleDialect
+    #database-platform: org.hibernate.dialect.OracleDialect
     hibernate:
       ddl-auto: create
+    open-in-view: false
   datasource:
     hikari:
       auto-commit: false
-      password: test
-      username: test
+      password: cscs
+      username: cscs
+      minimum-idle: 10
+      maximum-pool-size: 60
+      idle-timeout: 60000
+
     url: jdbc:oracle:thin:@localhost:1521/FREEPDB1
 
 ibm:
@@ -31,8 +35,8 @@ ibm:
     connName: localhost(1414)
     user: admin
     password: passw0rd
-    pool:
-      enabled: false
+#    pool:
+#      enabled: false
 #      max-connections: 4
 #      max-sessions-per-connection: 500
 
@@ -42,3 +46,20 @@ management:
     web:
       exposure:
         include: health, metrics, prometheus
+
+
+logging:
+  level:
+    org:
+      springframework:
+        jms: TRACE
+        transaction:
+          interceptor: TRACE
+      hibernate:
+        engine:
+          transaction:
+            internal:
+              TransactionImpl: DEBUG
+    com:
+      zaxxer:
+        hikari: TRACE

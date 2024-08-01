@@ -7,7 +7,6 @@ import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import jakarta.jms.ConnectionFactory;
 import jakarta.persistence.EntityManagerFactory;
@@ -16,11 +15,14 @@ import lombok.extern.slf4j.Slf4j;
 @Configuration
 @Slf4j
 @EnableJms
+// @EnableTransactionManagement
 public class TransactionalConfig {
 
     // @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
-        return new JpaTransactionManager(entityManagerFactory);
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(entityManagerFactory);
+        return transactionManager;
     }
 
     @Bean
@@ -32,6 +34,9 @@ public class TransactionalConfig {
         factory.setErrorHandler(errorHandler);
         factory.setSessionTransacted(true);
         factory.setTransactionManager(platformTransactionManager);
+        // factory.setCacheLevelName("CACHE_CONSUMER");
+        // factory.setReceiveTimeout(60000L);
+
         factory.setExceptionListener(e -> log.error("Hiba a DefaultJmsListenerContainer-ben", e));
         return factory;
     }
