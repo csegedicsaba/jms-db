@@ -26,5 +26,5 @@ spec:
   type: rest
   lifecycle: production
   definition:
-    $text: cscs
+    $yaml: cscs.yaml
 
