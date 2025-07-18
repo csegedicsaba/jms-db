@@ -16,15 +16,3 @@ spec:
   owner: CsCs
   lifecycle: production
   domain: customer
----
-apiVersion: backstage.io/v1alpha1
-kind: API
-metadata:
-  name: jms-to-db-api
-spec:
-  owner: CsCs
-  type: rest
-  lifecycle: production
-  definition:
-    $yaml: cscs.yaml
-
