@@ -27,5 +27,4 @@ spec:
   owner: CsCs
   type: rest
   lifecycle: production
-  definition:
-    $openapi: ./openapi.yaml
+
