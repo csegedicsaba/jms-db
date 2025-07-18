@@ -26,5 +26,5 @@ spec:
   type: rest
   lifecycle: production
   definition:
-    $openapi: ./openapi.yaml
+    $yaml: ./openapi.yaml
 
