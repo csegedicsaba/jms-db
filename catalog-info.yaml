@@ -27,5 +27,6 @@ spec:
   owner: CsCs
   type: rest
   lifecycle: production
-  definition: cscs
+  definition:
+    $text: cscs
 
