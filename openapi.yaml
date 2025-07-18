@@ -1,0 +1,60 @@
+openapi: 3.0.3
+info:
+  title: Weather API
+  description: Sample API for retrieving weather information using Azure style conventions.
+  version: 1.0.0
+servers:
+  - url: https://contoso.openai.azure.com/openai
+    description: Azure production endpoint
+    variables:
+      endpoint:
+        default: contoso.openai.azure.com
+paths:
+  /weather:
+    get:
+      summary: Get weather information by city
+      operationId: getWeatherByCity
+      parameters:
+        - name: city
+          in: query
+          description: Name of the city to retrieve weather for
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Weather data for the specified city
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  city:
+                    type: string
+                  temperature:
+                    type: number
+                    format: float
+                  condition:
+                    type: string
+        '400':
+          description: Invalid city parameter
+        '500':
+          description: Internal server error
+components:
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: api-key
+      in: header
+  schemas:
+    WeatherResponse:
+      type: object
+      properties:
+        city:
+          type: string
+        temperature:
+          type: number
+        condition:
+          type: string
+security:
+  - apiKeyHeader: []

@@ -1,0 +1,30 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: jms-db-service
+  labels:
+    runtime: openshift
+  tags:
+    - java
+    - openshift
+  links:
+    - url: https://github.com/csegedicsaba/jms-db
+      title: github repo
+spec:
+  type: service
+  owner: CsCs
+  lifecycle: production
+  domain: customer
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: jms-to-db-api
+spec:
+  owner: CsCs
+  type: rest
+  lifecycle: production
+  definition:
+    $openapi: ./openapi.yaml
+
