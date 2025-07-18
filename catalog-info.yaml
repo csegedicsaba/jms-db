@@ -21,10 +21,11 @@ apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
   name: jms-to-db-api
+  annotations:
+    openapi/ref-basepath: ./
 spec:
   owner: CsCs
   type: rest
   lifecycle: production
   definition:
-    $yaml: ./openapi.yaml
-
+    $openapi: ./openapi.yaml
